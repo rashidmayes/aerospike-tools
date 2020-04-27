@@ -19,7 +19,7 @@ import com.aerospike.client.query.Statement;
 import com.rashidmayes.aerospike.annotations.AerospikeBin;
 import com.rashidmayes.aerospike.annotations.AerospikeKey;
 import com.rashidmayes.aerospike.annotations.AerospikeRecord;
-import com.sun.istack.internal.NotNull;
+import com.sun.istack.NotNull;
 
 public class AeroMapper {
 
@@ -155,7 +155,7 @@ public class AeroMapper {
             		T result = convertRecord(clazz, record);
                 	
                 	return result;
-            	} catch (IllegalAccessException | InstantiationException e) {
+            	} catch (ReflectiveOperationException e) {
             		throw new AerospikeException(e);
             	}
         	}
@@ -187,7 +187,7 @@ public class AeroMapper {
             		T result = convertRecord(clazz, record);
                 	
                 	return result;
-            	} catch (IllegalAccessException | InstantiationException e) {
+            	} catch (ReflectiveOperationException e) {
             		throw new AerospikeException(e);
             	}
         	}
@@ -335,7 +335,7 @@ public class AeroMapper {
             			break;
             		}
             	}  
-        	} catch (InstantiationException | IllegalAccessException e) {
+        	} catch (ReflectiveOperationException e) {
 				throw new AerospikeException(e);
 			} finally {
         		if ( recordSet != null ) {
@@ -374,7 +374,7 @@ public class AeroMapper {
             			break;
             		}
             	}  
-        	} catch (InstantiationException | IllegalAccessException e) {
+        	} catch (ReflectiveOperationException e) {
 				throw new AerospikeException(e);
 			} finally {
         		if ( recordSet != null ) {
@@ -388,8 +388,8 @@ public class AeroMapper {
         }
 	}
 	
-	public <T> T convertRecord(Class<T> clazz, Record record) throws InstantiationException, IllegalAccessException {
-		T result = clazz.newInstance();
+	public <T> T convertRecord(Class<T> clazz, Record record) throws ReflectiveOperationException {
+		T result = clazz.getConstructor().newInstance();
 		String binName;
 		
     	for (Field field: clazz.getDeclaredFields()) {
