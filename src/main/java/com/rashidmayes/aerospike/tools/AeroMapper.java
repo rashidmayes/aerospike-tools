@@ -19,7 +19,7 @@ import com.aerospike.client.query.Statement;
 import com.rashidmayes.aerospike.annotations.AerospikeBin;
 import com.rashidmayes.aerospike.annotations.AerospikeKey;
 import com.rashidmayes.aerospike.annotations.AerospikeRecord;
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.*;
 
 public class AeroMapper {
 
