@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.aerospike.client.AerospikeClient;
@@ -19,7 +21,7 @@ import com.aerospike.client.query.Statement;
 import com.rashidmayes.aerospike.annotations.AerospikeBin;
 import com.rashidmayes.aerospike.annotations.AerospikeKey;
 import com.rashidmayes.aerospike.annotations.AerospikeRecord;
-import com.sun.istack.NotNull;
+
 
 public class AeroMapper {
 

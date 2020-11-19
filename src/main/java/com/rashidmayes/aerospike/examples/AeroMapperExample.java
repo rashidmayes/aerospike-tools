@@ -1,5 +1,9 @@
 package com.rashidmayes.aerospike.examples;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -19,7 +23,7 @@ public class AeroMapperExample {
 		ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
 		
         try {
-        	AerospikeClient client = new AerospikeClient("aerospike host",3000);
+        	AerospikeClient client = new AerospikeClient("ec2-52-200-188-251.compute-1.amazonaws.com",3000);
         	AeroMapper mapper = new AeroMapper(client);
         	
         	
@@ -34,7 +38,7 @@ public class AeroMapperExample {
     		System.out.println(":::: IN ::::");
     		System.out.println(objectWriter.writeValueAsString(p));
         	
-    		mapper.save("test",p);
+    		mapper.save(p);
 
         	
         	p = mapper.read(Person.class, "123456789");
@@ -44,6 +48,9 @@ public class AeroMapperExample {
         	System.out.println(objectWriter.writeValueAsString(p));
         	
 
+        	List<String> temp = new ArrayList<>();
+        	Map<String, Person> map = new HashMap<>();
+        	map.put("1", new Person());
         	for ( int i = 0; i < 100; i++ ) {
         		p = new Person();
         		p.setAge(RandomUtils.nextInt());
@@ -51,7 +58,9 @@ public class AeroMapperExample {
         		p.setLastName(RandomStringUtils.randomAlphabetic(8));
         		p.setHeight(RandomUtils.nextFloat());
         		p.setSsn(String.valueOf(i));
-        		
+        		temp.add(p.getSsn());
+        		p.setList(temp);
+        		p.setMap(map);
         		mapper.save(p);
         	}
         	
@@ -61,7 +70,7 @@ public class AeroMapperExample {
             		System.out.println(String.format("\n\n:::: %s ::::", person.getSsn()));
 					System.out.println(objectWriter.writeValueAsString(person));
 					
-					mapper.delete(person);
+					//mapper.delete(person);
 				} catch (JsonProcessingException e) {
 					e.printStackTrace();
 				}
