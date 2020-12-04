@@ -28,9 +28,9 @@ public class AeroMapperExample {
         	
         	
     		Person p = new Person();
-    		p.setFirstName("John");
+    		p.setFirstName("Rashid");
     		p.setLastName("Doe");
-    		p.setSsn("123456789");
+    		p.setSsn("00909090");
     		p.setAge(17);
     		p.setHeight(5.10f);
     		p.setPhoto("RandomStringUtils.random(256)".getBytes());
@@ -41,7 +41,7 @@ public class AeroMapperExample {
     		mapper.save(p);
 
         	
-        	p = mapper.read(Person.class, "123456789");
+        	p = mapper.read(Person.class, "00909090");
         	
 
     		System.out.println("\n\n:::: OUT ::::");

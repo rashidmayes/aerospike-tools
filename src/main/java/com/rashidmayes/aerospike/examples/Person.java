@@ -11,6 +11,8 @@ import com.rashidmayes.aerospike.annotations.AerospikeRecord;
 @AerospikeRecord(namespace="primary", set="people")
 public class Person implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	@AerospikeKey
 	@AerospikeBin(name="ssn")
 	private String ssn; 
